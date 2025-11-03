@@ -1,103 +1,100 @@
-/* Layout geral */
 @import url('https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap');
-.container {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  /* Painel esquerdo */
-  .left-panel {
-    background-color: #8a2be2;
-    color: white;
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  .left-panel h2 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .left-panel p {
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
-  }
-  
-  .btn-enter {
-    background-color: #b37aff;
-    border: none;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
-    padding: 0.7rem 2.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .btn-enter:hover {
-    background-color: #9d5cff;
-  }
-  
-  /* Painel direito */
-  .right-panel {
-    background-color: #e7d4ff;
-    width: 65%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    font-family: "Rammetto One", sans-serif;
-    font-style: normal;
-    color: #3b007a;
-    margin-bottom: 0.5rem;
-  }
-  
-  .subtitle {
-    font-size: 1.4rem;
-    color: #673ab7;
-  }
-  
-  .small-text {
-    font-size: 0.8rem;
-    color: #6a4fa3;
-    margin-bottom: 2rem;
-  }
-  
-  /* Formulário */
-  .form {
-    width: 70%;  
-  }
 
-  .input-group {
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.login-container {
+  background-color: #e7d4ff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+}
 
-  input, select{
-    height: 1.5rem;
-    width: 70%;
-    border: solid 1px #b37aff;
-    background-color: #b37aff;
-  }
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: "Rammetto One", sans-serif;
+  color: #3b007a;
+  margin-bottom: 1.5rem;
+}
 
-  input::placeholder{
-    font-size: 10px;
-    font-weight: bold;
-    color: #673ab7;
-  }
+.login-box {
+  background-color: #8a2be2;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 340px;
+  text-align: center;
+}
 
+.login-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.login-box p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background-color: #b37aff;
+  border-radius: 4px;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  margin: 0 0.4rem;
+}
+
+.login-input {
+  border: none;
+  background: none;
+  outline: none;
+  color: rgb(142, 3, 223);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+input::placeholder {
+  color: #f1e4ff;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.forgot-password {
+  color: #d1b6ff;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.btn-login {
+  background-color: #b37aff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #9d5cff;
+}
+
+.back-text {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.back-text span {
+  color: #f1e4ff;
+  font-weight: bold;
+  cursor: pointer;
+}
