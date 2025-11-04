@@ -67,6 +67,7 @@
   width: 75%;
   height: 1.5rem;
   margin-bottom: 1rem;
+  padding: 0.4rem;
 }
 
 input::placeholder {
