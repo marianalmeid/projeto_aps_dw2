@@ -37,6 +37,7 @@
   margin-bottom: 1rem;
 }
 
+
 .input-group {
   display: flex;
   align-items: center;
@@ -46,21 +47,30 @@
   margin-bottom: 1rem;
 }
 
+.login-form{
+  height: 10rem;
+  justify-content: space-between;
+  padding: 0.3rem;
+}
+
 .icon {
   margin: 0 0.4rem;
 }
 
 .login-input {
   border: none;
-  background: none;
+  background: #b37aff;
   outline: none;
-  color: rgb(142, 3, 223);
+  color: rgb(255, 255, 255);
   font-size: 0.9rem;
   flex: 1;
+  width: 75%;
+  height: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 input::placeholder {
-  color: #f1e4ff;
+  color: #673ab7;
   font-weight: 600;
   font-size: 0.8rem;
 }
