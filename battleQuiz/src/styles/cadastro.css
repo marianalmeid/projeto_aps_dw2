@@ -109,10 +109,17 @@ body, html {
   
   .c-input-group {
     height: 3rem;
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .icon{
+    width: 10%;
+
+  }
+  .space{
+    width: 10%;
   }
 
   select {
@@ -125,7 +132,7 @@ body, html {
     border: solid 1px #b37aff;
     background-color: #b37aff;
     height: 2rem;
-    width: 70%;
+    width: 80%;
     color: #ffffff;
     font-weight: bold;
     border-radius: 4px;
@@ -157,10 +164,17 @@ body, html {
     .container {
       flex-direction: column;
       display: flex;
+      width: 100%;
+      height: auto;
       
     }
 
     .left-panel{
+      width: 100%;
+      height: 50%;
+    }
+
+    .right-panel{
       width: 100%;
     }
   }
