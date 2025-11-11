@@ -16,7 +16,7 @@ body, html {
 
 .container {
     display: flex;
-    height: 100vh;
+    height: 100%;
     width: 100%;
   }
   
@@ -25,6 +25,7 @@ body, html {
     background-color: #8a2be2;
     color: white;
     width: 35%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,6 +68,7 @@ body, html {
   .right-panel {
     background-color: #e7d4ff;
     width: 65%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
