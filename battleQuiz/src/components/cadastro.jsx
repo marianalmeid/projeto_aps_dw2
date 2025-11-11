@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/cadastro.css";
 
-export default function Cadastro({ irParaLogin }) {
+export default function Cadastro({ irParaLogin, irParaTelaIniJog}) {
   return (
     <div className="container">
       {/* Lado esquerdo */}
@@ -52,7 +52,7 @@ export default function Cadastro({ irParaLogin }) {
             <div className="space"></div>
           </div>
         </form>
-        <button className="btn-cadastro">Cadastrar</button>
+        <button className="btn-cadastro" onClick={irParaTelaIniJog}>Cadastrar</button>
       </div>
     </div>
   );

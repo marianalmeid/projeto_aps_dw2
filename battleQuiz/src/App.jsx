@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Cadastro from "./components/cadastro.jsx";
 import Login from "./components/login.jsx";
-import telaInicialJogador from "./components/telaInicialJog.jsx";
+import TelaInicialJogador from "./components/telaInicialJog.jsx";
 import "./App.css";
 
 function App() {
@@ -10,11 +10,21 @@ function App() {
   return (
     <div className="App">
       {paginaAtual === "cadastro" && (
-        <Cadastro irParaLogin={() => setPaginaAtual("login")} />
-        <telaInicialJogador irParaTelaIniJog={() => setPaginaAtual("cadastro")} />
-      )};
-       : (
-        <Login irParaCadastro={() => setPaginaAtual("cadastro")} />
+       
+       <Cadastro 
+          irParaLogin={() => setPaginaAtual("login")} 
+          irParaTelaIniJog={() => setPaginaAtual("telaInicialJog")}
+        />
+      )}
+
+      {paginaAtual === "login" && (
+        <Login 
+          irParaCadastro={() => setPaginaAtual("cadastro")}
+          irParaTelaIniJog={() => setPaginaAtual("telaInicialJog")} />
+      )}
+
+      {paginaAtual === "telaInicialJog" && (
+        <TelaInicialJogador />
       )}
     </div>
   );

@@ -1,0 +1,16 @@
+@import "../global.css";
+
+.container{
+    background-color: var(--roxo1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.box{
+    background-color: var(--roxo2);
+    width: 50%;
+    height: 60%;
+
+}

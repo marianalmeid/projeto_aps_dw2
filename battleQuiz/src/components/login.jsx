@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/login.css";
 
-export default function Login({ irParaCadastro }) {
+export default function Login({ irParaCadastro, irParaTelaIniJog }) {
   return (
     <div className="login-container">
       <h1 className="title">
@@ -31,7 +31,7 @@ export default function Login({ irParaCadastro }) {
 
           <a href="#" className="forgot-password">Esqueci minha senha</a>
 
-          <button className="btn-login">Entrar</button>
+          <button className="btn-login" onClick={irParaTelaIniJog}>Entrar</button>
         </form>
 
         <p className="back-text">
