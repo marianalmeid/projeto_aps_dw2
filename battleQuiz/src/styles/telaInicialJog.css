@@ -33,6 +33,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 }
 
 /*Modal*/
@@ -40,6 +41,37 @@
     width: 20%;
     height: 30%;
     display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: (var(--roxo1));
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-tij .perfil-btn .icon{
+    border: none;
+    height: 50%;
+    width: 24%;
+    border-radius: 100%;
+    border: none;
+    padding: 0;
+    background-color: var(--roxo2);
 }
 
 .box{
