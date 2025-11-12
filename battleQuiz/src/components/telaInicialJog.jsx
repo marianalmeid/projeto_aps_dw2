@@ -5,7 +5,7 @@ export default function TelaInicialJogador(){
     const [abrirModal, setAbrirModal] = useState(false);
     return(
         <div className="container-telain">
-            <div className="header-telain">
+            <div className="header-tij">
                 <div className="space-ti"></div>
                 <h1 className="title">Tela inicial</h1>
                 <div className="perfil-btn">
@@ -13,12 +13,12 @@ export default function TelaInicialJogador(){
 
                      {/* Modal */}
                     {abrirModal && (
-                        <div style={estiloFundo}>
-                        <div style={estiloModal}>
-                            <h2>Este é o modal!</h2>
-                            <p>Conteúdo dentro do modal</p>
-                            <button onClick={() => setAbrirModal(false)}>Fechar</button>
-                        </div>
+                        <div className="modal-tij">
+                            <div className="info">
+                                <h2>Este é o modal!</h2>
+                                <p>Conteúdo dentro do modal</p>
+                                <button onClick={() => setAbrirModal(false)}>Fechar</button>
+                            </div>
                         </div>
                     )}
                 </div>
