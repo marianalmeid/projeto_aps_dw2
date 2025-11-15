@@ -1,10 +1,72 @@
 import React, { useState } from "react";
+import { supabase } from "../supabaseClient";
 import "../styles/cadastro.css";
 
-export default function Cadastro({ irParaLogin, irParaTelaIniJog}) {
+export default function Cadastro({ irParaLogin}) {
 
    const [mostrarSenha, setMostrarSenha] = useState(false);
   const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
+
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [tipoUsuario, setTipoUsuario] = useState("");
+
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
+
+  const handleCadastro = async () => {
+    setErro("");
+
+    if (!nome || !email || !senha || !confirmarSenha || !tipoUsuario) {
+      setErro("Preencha todos os campos.");
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      setErro("As senhas não coincidem.");
+      return;
+    }
+    setCarregando(true);
+
+
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: senha,
+    });
+
+     if (error) {
+      setErro(error.message);
+      setCarregando(false);
+      return;
+    }
+
+    const user = data.user;
+
+    const { error: profileError } = await supabase
+      .from("pessoa")
+      .insert([
+        {
+          id: user.id,
+          name: nome,
+          type: tipoUsuario,
+        }
+      ]);
+
+    if (profileError) {
+      setErro(profileError.message);
+      setCarregando(false);
+      return;
+    }
+
+    setCarregando(false);
+
+    // Vai para tela de login
+    irParaLogin();
+  };
+
+
   return (
     <div className="container">
       {/* Lado esquerdo */}
@@ -24,14 +86,22 @@ export default function Cadastro({ irParaLogin, irParaTelaIniJog}) {
           {/* Nome */}
           <div className="c-input-group">
             <i className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#673ab7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></i>
-            <input className="cadastro-input" type="text" placeholder="NOME" />
+            <input 
+              className="cadastro-input" 
+              type="text" 
+              placeholder="NOME" 
+              onChange={(e) => setNome(e.target.value)}/>
             <div className="space"></div>
           </div>
 
           {/* E-mail */}
           <div className="c-input-group">
             <i className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#673ab7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></i>
-            <input className="cadastro-input" type="email" placeholder="E-MAIL" />
+            <input 
+              className="cadastro-input" 
+              type="email" 
+              placeholder="E-MAIL"
+              onChange={(e) => setEmail(e.target.value)} />
             <div className="space"></div>
           </div>
 
@@ -44,6 +114,7 @@ export default function Cadastro({ irParaLogin, irParaTelaIniJog}) {
                 className="cadastro-input"
                 type={mostrarSenha ? "text" : "password"}
                 placeholder="SENHA"
+                onChange={(e) => setSenha(e.target.value)}
               />
 
               <button
@@ -81,6 +152,7 @@ export default function Cadastro({ irParaLogin, irParaTelaIniJog}) {
                 className="cadastro-input"
                 type={mostrarConfirmarSenha ? "text" : "password"}
                 placeholder="CONFIRMAR SENHA"
+                onChange={(e) => setConfirmarSenha(e.target.value)}
               />
 
               <button
@@ -113,15 +185,25 @@ export default function Cadastro({ irParaLogin, irParaTelaIniJog}) {
           {/* Selecionar Usuário */}
           <div className="c-input-group">
             <i className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#673ab7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></i>
-            <select>
+            <select
+              value={tipoUsuario}
+              onChange={(e) => setTipoUsuario(e.target.value)}>
               <option value="">USUÁRIO</option>
               <option value="aluno">Aluno</option>
               <option value="professor">Professor</option>
             </select>
+
+             {/* ERRO */}
+             {erro && <p className="erro">{erro}</p>}
+
             <div className="space"></div>
           </div>
         </form>
-        <button className="btn-cadastro" onClick={irParaTelaIniJog}>Cadastrar</button>
+        <button className="btn-cadastro" 
+        onClick={handleCadastro}
+        disabled={carregando}>{carregando ? "Cadastrando..." : "Cadastrar"}</button>
+
+
       </div>
     </div>
   );
