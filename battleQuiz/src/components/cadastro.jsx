@@ -4,7 +4,7 @@ import "../styles/cadastro.css";
 
 export default function Cadastro({ irParaLogin}) {
 
-   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
   const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
 
   const [nome, setNome] = useState("");
@@ -13,8 +13,11 @@ export default function Cadastro({ irParaLogin}) {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [tipoUsuario, setTipoUsuario] = useState("");
 
+
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+
+ 
 
   const handleCadastro = async () => {
     setErro("");
@@ -30,7 +33,7 @@ export default function Cadastro({ irParaLogin}) {
     }
     setCarregando(true);
 
-
+    //faz o cadastro
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: senha,
@@ -42,18 +45,26 @@ export default function Cadastro({ irParaLogin}) {
       return;
     }
 
-    const user = data.user;
-
+    //salva no banco de dads
+    const userId = data.user.id;
     const { error: profileError } = await supabase
       .from("pessoa")
       .insert([
         {
           id: user.id,
-          name: nome,
-          type: tipoUsuario,
+          email: email,
+          nome: nome,
+          usuario: tipoUsuario,
         }
       ]);
+      
+      if (insertError) {
+        alert(insertError.message);
+        return;
+      }
+      alert("Usuário cadastrado com sucesso!");
 
+      
     if (profileError) {
       setErro(profileError.message);
       setCarregando(false);
@@ -61,6 +72,8 @@ export default function Cadastro({ irParaLogin}) {
     }
 
     setCarregando(false);
+
+    
 
     // Vai para tela de login
     irParaLogin();
@@ -133,7 +146,7 @@ export default function Cadastro({ irParaLogin}) {
                   </svg>
                 ) : (
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    strokeWidth="..." strokeLinecap="round" strokeLinejoin="round"
                     viewBox="0 0 24 24">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
                     <circle cx="12" cy="12" r="3"/>
@@ -146,7 +159,7 @@ export default function Cadastro({ irParaLogin}) {
 
           {/* Confirmar senha */}
           <div className="c-input-group">
-            <i className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#673ab7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-icon lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i>
+            <i className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#673ab7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="..." stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-icon lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i>
             <div className="input-wrapper">
               <input
                 className="cadastro-input"
@@ -193,10 +206,11 @@ export default function Cadastro({ irParaLogin}) {
               <option value="professor">Professor</option>
             </select>
 
-             {/* ERRO */}
+             
+            <div className="space"></div>
+            {/* ERRO */}
              {erro && <p className="erro">{erro}</p>}
 
-            <div className="space"></div>
           </div>
         </form>
         <button className="btn-cadastro" 
