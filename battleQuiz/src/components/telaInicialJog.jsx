@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../styles/telaInicialJog.css";
 
-export default function TelaInicialJogador(){
+export default function TelaInicialJogador({voltarParaLogin}){
     const [abrirModal, setAbrirModal] = useState(false);
     const botaoRef = useRef(null);
     const modalRef = useRef(null);
@@ -58,7 +58,7 @@ export default function TelaInicialJogador(){
                             <div className="conteudo-modal">
                                 <div className="nome">nome</div>
                                 <div className="email">fulano@gmail.com</div>
-                                <div className="logout">encerrar sessão</div>
+                                <span className="logout" onClick={voltarParaLogin}>Encerrar sessão</span>
                             </div>
                            
                         </div>

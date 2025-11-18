@@ -146,7 +146,7 @@ export default function Cadastro({ irParaLogin}) {
                   </svg>
                 ) : (
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                    strokeWidth="..." strokeLinecap="round" strokeLinejoin="round"
+                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                     viewBox="0 0 24 24">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
                     <circle cx="12" cy="12" r="3"/>
@@ -159,7 +159,7 @@ export default function Cadastro({ irParaLogin}) {
 
           {/* Confirmar senha */}
           <div className="c-input-group">
-            <i className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#673ab7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="..." stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-icon lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i>
+            <i className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#673ab7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-icon lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i>
             <div className="input-wrapper">
               <input
                 className="cadastro-input"

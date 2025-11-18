@@ -24,7 +24,8 @@ function App() {
       )}
 
       {paginaAtual === "telaInicialJog" && (
-        <TelaInicialJogador />
+        <TelaInicialJogador 
+        voltarParaLogin={() => setPaginaAtual("login")}/>
       )}
     </div>
   );

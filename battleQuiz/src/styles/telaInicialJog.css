@@ -83,6 +83,15 @@ button {
     flex-direction: column;
 }
 
+.modal-tij .logout{
+    font-weight: bold;
+    cursor: pointer;
+}
+.modal-tij .logout:hover{
+    color: aliceblue;
+}
+
+
 .header-tij .perfil-btn .icon{
     border: none;
     color: var(--roxo3);
