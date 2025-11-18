@@ -1,8 +1,32 @@
 import React, { useState } from "react";
+import { supabase } from "../supabaseClient";
 import "../styles/login.css";
 
 export default function Login({ irParaCadastro, irParaTelaIniJog }) {
   const [mostrarSenha, setMostrarSenha] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+
+  const handleLogin = async (e) => {
+  e.preventDefault();
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: senha,
+  });
+
+  if (error) {
+    console.error("Erro no login:", error.message);
+    alert("E-mail ou senha incorretos!");
+    return;
+  }
+
+  //abrir próxima tela
+  irParaTelaIniJog();
+};
+
 
   return (
     <div className="login-container">
@@ -29,7 +53,9 @@ export default function Login({ irParaCadastro, irParaTelaIniJog }) {
             <input
               className="login-input"
               type="text"
-              placeholder="NOME OU E-MAIL"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="E-MAIL"
             />
           </div>
 
@@ -47,7 +73,9 @@ export default function Login({ irParaCadastro, irParaTelaIniJog }) {
 
             <input
               className="login-input"
+              value={senha}
               type={mostrarSenha ? "text" : "password"}
+              onChange={(e) => setSenha(e.target.value)}
               placeholder="SENHA"
             />
 
@@ -79,7 +107,7 @@ export default function Login({ irParaCadastro, irParaTelaIniJog }) {
 
           <a href="#" className="forgot-password">Esqueci minha senha</a>
 
-          <button className="btn-login" onClick={irParaTelaIniJog}>Entrar</button>
+          <button className="btn-login" onClick={handleLogin}>Entrar</button>
         </form>
 
         <p className="back-text">

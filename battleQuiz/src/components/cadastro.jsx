@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
 import "../styles/cadastro.css";
 
-export default function Cadastro({ irParaLogin}) {
+export default function Cadastro({irParaLogin}) {
 
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
@@ -21,6 +21,7 @@ export default function Cadastro({ irParaLogin}) {
 
   const handleCadastro = async () => {
     setErro("");
+
 
     if (!nome || !email || !senha || !confirmarSenha || !tipoUsuario) {
       setErro("Preencha todos os campos.");
@@ -47,29 +48,25 @@ export default function Cadastro({ irParaLogin}) {
 
     //salva no banco de dads
     const userId = data.user.id;
-    const { error: profileError } = await supabase
+    
+     //transforma o usuario em um valor inteiro
+    const usuario = Number(tipoUsuario);
+
+    const { error: insertError } = await supabase
       .from("pessoa")
-      .insert([
-        {
-          id: user.id,
-          email: email,
+      .insert({
+          id: userId,
           nome: nome,
-          usuario: tipoUsuario,
+          email: email,
+          tipoUsuario: usuario,
         }
-      ]);
+      );
       
       if (insertError) {
         alert(insertError.message);
         return;
       }
       alert("Usuário cadastrado com sucesso!");
-
-      
-    if (profileError) {
-      setErro(profileError.message);
-      setCarregando(false);
-      return;
-    }
 
     setCarregando(false);
 
@@ -202,8 +199,8 @@ export default function Cadastro({ irParaLogin}) {
               value={tipoUsuario}
               onChange={(e) => setTipoUsuario(e.target.value)}>
               <option value="">USUÁRIO</option>
-              <option value="aluno">Aluno</option>
-              <option value="professor">Professor</option>
+              <option value="2">Aluno</option>
+              <option value="1">Professor</option>
             </select>
 
              
