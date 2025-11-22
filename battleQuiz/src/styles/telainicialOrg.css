@@ -9,7 +9,7 @@ button {
     cursor: pointer;
   }
   
-.container-telaij{
+.container-telaio{
     background-color: var(--roxo1);
     display: flex;
     align-items: center;
@@ -19,7 +19,7 @@ button {
     height: 100%;
 }
 
-.header-tij{
+.header-tio{
     width: 100%;
     height: 20%;
     display: flex;
@@ -30,14 +30,14 @@ button {
     width: 20%;
 }
 
-.header-tij .title{
+.header-tio .title{
     width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.header-tij .perfil-btn{
+.header-tio .perfil-btn{
     width: 20%;
     display: flex;
     align-items: center;
@@ -47,7 +47,7 @@ button {
 }
 
 /*Modal*/
-.modal-tij{
+.modal-tio{
     width: 15%;
     height: 30%;
     display: flex;
@@ -75,7 +75,7 @@ button {
 }
 
 
-.modal-tij .conteudo-modal{
+.modal-tio .conteudo-modal{
     width: 100%;
     height: 100%;
     display: flex;
@@ -83,16 +83,16 @@ button {
     flex-direction: column;
 }
 
-.modal-tij .logout{
+.modal-tio .logout{
     font-weight: bold;
     cursor: pointer;
 }
-.modal-tij .logout:hover{
+.modal-tio .logout:hover{
     color: aliceblue;
 }
 
 
-.header-tij .perfil-btn .icon{
+.header-tio .perfil-btn .icon{
     border: none;
     color: var(--roxo3);
     height: 50%;
@@ -103,7 +103,7 @@ button {
     background-color: var(--roxo1);
 }
 
-.header-tij .perfil-btn .icon svg{
+.header-tio .perfil-btn .icon svg{
     width: 100%;
     height: 100%;
 }

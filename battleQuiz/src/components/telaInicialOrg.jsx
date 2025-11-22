@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import "../styles/telaInicialJog.css";
+import "../styles/telaInicialOrg.css";
 
-export default function TelaInicialJogador({voltarParaLogin}){
+export default function TelaInicialOrganizador({voltarParaLogin}){
     const [abrirModal, setAbrirModal] = useState(false);
     const botaoRef = useRef(null);
     const modalRef = useRef(null);
@@ -41,8 +41,8 @@ export default function TelaInicialJogador({voltarParaLogin}){
     }, [abrirModal]);
 
     return(
-        <div className="container-telaij">
-            <div className="header-tij">
+        <div className="container-telaio">
+            <div className="header-tio">
                 <div className="space-ti"></div>
                 <h1 className="title">UTFPR | Battle Quiz</h1>
                 <div className="perfil-btn">
@@ -53,11 +53,11 @@ export default function TelaInicialJogador({voltarParaLogin}){
                     {abrirModal && (
                         <div 
                         ref={modalRef}
-                        className="modal-tij"
+                        className="modal-tio"
                             style={{ top: posicao.top, left: posicao.left }}>
                             <div className="conteudo-modal">
                                 <div className="nome">nome</div>
-                                <div className="email">player@gmail.com</div>
+                                <div className="email">organizador@gmail.com</div>
                                 <span className="logout" onClick={voltarParaLogin}>Encerrar sessão</span>
                             </div>
                            

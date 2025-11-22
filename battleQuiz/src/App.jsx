@@ -3,6 +3,7 @@ import Cadastro from "./components/cadastro.jsx";
 import Login from "./components/login.jsx";
 import TelaInicialJogador from "./components/telaInicialJog.jsx";
 import "./App.css";
+import TelaInicialOrganizador from "./components/telaInicialOrg.jsx";
 
 function App() {
   const [paginaAtual, setPaginaAtual] = useState("cadastro");
@@ -20,12 +21,18 @@ function App() {
       {paginaAtual === "login" && (
         <Login 
           irParaCadastro={() => setPaginaAtual("cadastro")}
-          irParaTelaIniJog={() => setPaginaAtual("telaInicialJog")} />
+          irParaTelaIniJog={() => setPaginaAtual("telaInicialJog")}
+          irParaTelaIniOrg={() => setPaginaAtual("telaInicialOrg")} />
       )}
 
       {paginaAtual === "telaInicialJog" && (
         <TelaInicialJogador 
         voltarParaLogin={() => setPaginaAtual("login")}/>
+      )}
+
+      {paginaAtual === "telaInicialOrg" && (
+        <TelaInicialOrganizador
+        voltarParaLogin={() => setPaginaAtual("login")} />
       )}
     </div>
   );

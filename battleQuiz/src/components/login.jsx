@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
 import "../styles/login.css";
 
-export default function Login({ irParaCadastro, irParaTelaIniJog }) {
+export default function Login({ irParaCadastro, irParaTelaIniJog, irParaTelaIniOrg }) {
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -12,7 +12,8 @@ export default function Login({ irParaCadastro, irParaTelaIniJog }) {
   const handleLogin = async (e) => {
   e.preventDefault();
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+    // 1. LOGIN
+  const { data: loginData, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: senha,
   });
@@ -23,10 +24,38 @@ export default function Login({ irParaCadastro, irParaTelaIniJog }) {
     return;
   }
 
-  //abrir próxima tela
-  irParaTelaIniJog();
-};
+  console.log("LOGIN OK:", loginData);
 
+
+  const userId = loginData.user.id;
+
+  // 2. PEGAR TIPO DO USUÁRIO
+  const { data: pessoaDB, error: erroPessoa } = await supabase
+    .from("pessoa")
+    .select("tipoUsuario")
+    .eq("id", userId)
+    .single();
+
+  if (erroPessoa || !pessoaDB) {
+    console.error("Erro ao buscar tipoUsuario:", erroPessoa);
+    alert("Erro ao carregar informações do usuário!");
+    return;
+  }
+
+  const usuario = pessoaDB.tipoUsuario;
+
+  console.log("TIPO DO USUÁRIO É:", usuario);
+
+  // 3. REDIRECIONAR
+  if (usuario === 2) {
+    irParaTelaIniJog();
+  } else if (usuario === 1) {
+    irParaTelaIniOrg();
+  } else {
+    console.error("Tipo de usuário inválido:", usuario);
+    alert("Tipo de usuário desconhecido!");
+  }  
+  };
 
   return (
     <div className="login-container">
