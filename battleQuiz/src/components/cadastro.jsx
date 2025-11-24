@@ -14,6 +14,7 @@ export default function Cadastro({irParaLogin}) {
   const [tipoUsuario, setTipoUsuario] = useState("");
 
 
+
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
 
@@ -22,6 +23,13 @@ export default function Cadastro({irParaLogin}) {
   const handleCadastro = async () => {
     setErro("");
 
+    // verifica o email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setErro("Digite um e-mail válido.");
+       return;
+    }
 
     if (!nome || !email || !senha || !confirmarSenha || !tipoUsuario) {
       setErro("Preencha todos os campos.");

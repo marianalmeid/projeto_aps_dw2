@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { supabase } from "../supabaseClient";
 import "../styles/telaInicialJog.css";
 
 export default function TelaInicialJogador({voltarParaLogin}){
@@ -6,6 +7,35 @@ export default function TelaInicialJogador({voltarParaLogin}){
     const botaoRef = useRef(null);
     const modalRef = useRef(null);
     const [posicao, setPosicao] = useState({top:0, left:0});
+
+    const [usuario, setUsuario] = useState({
+        nome: "",
+        email: ""
+    });
+
+    useEffect(() => {
+        async function carregarUsuario() {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (user) {
+                const { data } = await supabase
+                    .from("pessoa")
+                    .select("nome, email")
+                    .eq("id", user.id)
+                    .single();
+
+                if (data) {
+                    setUsuario({
+                        nome: data.nome,
+                        email: data.email
+                    });
+                }
+            }
+        }
+
+        carregarUsuario();
+    }, []);
+
 
     //calcula para abrir o modal
     useEffect(() => {
@@ -56,8 +86,8 @@ export default function TelaInicialJogador({voltarParaLogin}){
                         className="modal-tij"
                             style={{ top: posicao.top, left: posicao.left }}>
                             <div className="conteudo-modal">
-                                <div className="nome">nome</div>
-                                <div className="email">player@gmail.com</div>
+                                <div className="nome">{usuario.nome}</div>
+                                <div className="email">{usuario.email}</div>
                                 <span className="logout" onClick={voltarParaLogin}>Encerrar sessão</span>
                             </div>
                            
