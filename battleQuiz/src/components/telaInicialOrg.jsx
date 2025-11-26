@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import "../styles/telaInicialOrg.css";
 
-export default function TelaInicialOrganizador({voltarParaLogin}){
+export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}){
     const [abrirModal, setAbrirModal] = useState(false);
     const botaoRef = useRef(null);
     const modalRef = useRef(null);
@@ -123,7 +123,8 @@ export default function TelaInicialOrganizador({voltarParaLogin}){
                 </div>
 
                 <div className="acoes">
-                    <button className="btn-add">+</button>
+                    <button className="btn-add"
+                            onClick={irParaAbaCriar}>+</button>
                 </div>
 
             </div>

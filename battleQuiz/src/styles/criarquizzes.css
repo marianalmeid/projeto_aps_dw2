@@ -1,0 +1,14 @@
+@import "../global.css";
+
+.paginaCriar{
+    width: 100%;
+    height: 100%;
+    background-color: var(--roxo1);
+    display: flex;
+}
+
+.box-quiz{
+    width: 60%;
+    height: 60%;
+    background-color: var(--roxo2);
+}

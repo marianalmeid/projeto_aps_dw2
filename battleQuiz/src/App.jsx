@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Cadastro from "./components/cadastro.jsx";
 import Login from "./components/login.jsx";
 import TelaInicialJogador from "./components/telaInicialJog.jsx";
+import AbaCriarQuizz from "./components/criarquizzes.jsx";
 import "./App.css";
 import TelaInicialOrganizador from "./components/telaInicialOrg.jsx";
 
@@ -32,7 +33,14 @@ function App() {
 
       {paginaAtual === "telaInicialOrg" && (
         <TelaInicialOrganizador
-        voltarParaLogin={() => setPaginaAtual("login")} />
+        voltarParaLogin={() => setPaginaAtual("login")} 
+        irParaAbaCriar={() => setPaginaAtual("criarquizzes")}/>
+        
+      )}
+
+      {paginaAtual === "criarquizzes"&& (
+        <AbaCriarQuizz
+        voltarTelaIniOrg={() => setPaginaAtual("telaInicialOrg")}/>
       )}
     </div>
   );

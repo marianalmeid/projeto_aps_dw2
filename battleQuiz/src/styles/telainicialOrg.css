@@ -127,7 +127,7 @@ button {
 .btn-salas,
 .btn-rankings {
   background-color: #000000; 
-  color: #d9a7ff;
+  color: var(--roxo1);
   border: none;
   padding: 10px 22px;
   border-radius: 20px;
@@ -151,14 +151,15 @@ button {
 
 /* Botão grande "+" */
 .acoes {
+  height: auto;
   margin-top: 40px;
   padding-left: 20px; /* mantém ele no canto esquerdo */
 }
 
 .btn-add {
-  width: 70px;
-  height: 70px;
-  background-color: #cfa6ff;
+  width: 20%;
+  height: 30%;
+  background-color: (var(--roxo1));
   border: none;
   border-radius: 15px;
   font-size: 50px;
