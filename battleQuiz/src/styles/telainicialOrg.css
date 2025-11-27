@@ -1,4 +1,3 @@
-@import "../global.css";
 
 button {
     background: none;
@@ -10,7 +9,7 @@ button {
   }
   
 .container-telaio{
-    background-color: var(--roxo1);
+    background: var(--roxo1);
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -156,20 +155,20 @@ button {
   padding-left: 20px; /* mantém ele no canto esquerdo */
 }
 
-.btn-add {
+.btn-add{
   width: 20%;
   height: 30%;
-  background-color: (var(--roxo1));
+  background: var(--roxo1);
   border: none;
   border-radius: 15px;
   font-size: 50px;
-  color: #6a11cb;
+  color: var(--roxo2);
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 
-.btn-add:hover {
+.btn-add-tio:hover {
   background-color: #e4caff;
   transform: scale(1.05);
 }

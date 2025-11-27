@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cadastro from "./components/cadastro.jsx";
 import Login from "./components/login.jsx";
 import TelaInicialJogador from "./components/telaInicialJog.jsx";
@@ -7,7 +7,16 @@ import "./App.css";
 import TelaInicialOrganizador from "./components/telaInicialOrg.jsx";
 
 function App() {
-  const [paginaAtual, setPaginaAtual] = useState("cadastro");
+  //const [paginaAtual, setPaginaAtual] = useState("cadastro");
+
+  const [paginaAtual, setPaginaAtual] = useState(
+  localStorage.getItem("paginaAtual") || "cadastro"
+);
+
+useEffect(() => {
+  localStorage.setItem("paginaAtual", paginaAtual);
+}, [paginaAtual]);
+
 
   return (
     <div className="App">
@@ -38,7 +47,7 @@ function App() {
         
       )}
 
-      {paginaAtual === "criarquizzes"&& (
+      {paginaAtual === "criarquizzes" && (
         <AbaCriarQuizz
         voltarTelaIniOrg={() => setPaginaAtual("telaInicialOrg")}/>
       )}

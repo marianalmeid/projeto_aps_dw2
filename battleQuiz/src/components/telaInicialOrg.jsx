@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "../supabaseClient";
-import "../styles/telaInicialOrg.css";
+import "../styles/telainicialOrg.css";
 
 export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}){
     const [abrirModal, setAbrirModal] = useState(false);

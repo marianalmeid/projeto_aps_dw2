@@ -1,14 +1,41 @@
-@import "../global.css";
 
-.paginaCriar{
+.pagina-criar{
     width: 100%;
     height: 100%;
-    background-color: var(--roxo1);
+    background: var(--roxo1);
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagina-criar input{
+    border: none;
+    background-color: transparent;
+    margin: auto;
+
+}
+
+.header-criar{
+    display: flex;
+    height: 20%;
+    width: 100%;
 }
 
 .box-quiz{
     width: 60%;
-    height: 60%;
-    background-color: var(--roxo2);
+    height: 70%;
+    background: var(--roxo4);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 40px;
+    gap: 25px;
 }
+
+.input-pergunta {
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 17px;
+}
+
