@@ -151,13 +151,13 @@ button {
 /* Botão grande "+" */
 .acoes {
   height: auto;
-  margin-top: 40px;
+  margin-top: 10px;
   padding-left: 20px; /* mantém ele no canto esquerdo */
 }
 
 .btn-add{
-  width: 20%;
-  height: 30%;
+  width: 15%;
+  height: 40%;
   background: var(--roxo1);
   border: none;
   border-radius: 15px;

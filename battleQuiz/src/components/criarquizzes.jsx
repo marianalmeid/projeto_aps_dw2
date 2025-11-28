@@ -21,7 +21,8 @@ import "../styles/criarquizzes.css";
                 
                 <div className="lista-alternativa">
                     <div className="item-resposta">
-                        <input type="radio" name="resp" />
+                        <input type="radio" name="resp" 
+                        className="mark"/>
                         <input
                             type="text"
                             placeholder="Adicionar resposta 1"
