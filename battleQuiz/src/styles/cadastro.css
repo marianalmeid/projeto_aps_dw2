@@ -11,7 +11,8 @@
 body, html {
   width: 100%;
   height: 100%;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--fonte-perguntas)
+
 }
 
 .container {
@@ -35,8 +36,9 @@ body, html {
   }
   
   .left-panel h2 {
-    font-size: 1.8rem;
+    font-size: 3rem;
     margin-bottom: 0.5rem;
+    font-weight: bolder;
   }
   
   .left-panel p {
@@ -202,7 +204,8 @@ body, html {
     height: 3rem;
     width: 30%;
     color:aliceblue;
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: 1.5rem;
     background-color: #8762d6;
   }
 
