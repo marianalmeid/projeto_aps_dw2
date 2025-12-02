@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
 
 }
 .add-btn{
@@ -96,3 +97,54 @@
     font-size: 1rem;
 }
 
+.close-create{
+    font-size: 3rem;
+}
+
+.seta-btn {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 60px;
+    background: var(--roxo5);
+    color: #fff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .modal-lateral {
+    position: absolute;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100%;
+    background: var(--roxo5);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    transition: right 0.3s ease;
+  }
+
+  .modal-lateral.ativo {
+    right: 0;
+  }
+  
+  /* CONTROLES */
+  .modal-lateral select {
+    padding: 8px;
+    border: none;
+  }
+  
+  .add-pgnt {
+    padding: 10px;
+    margin-top: auto;
+  }
+  
+  .nav-btns {
+    display: flex;
+    justify-content: space-between;
+  }
+  

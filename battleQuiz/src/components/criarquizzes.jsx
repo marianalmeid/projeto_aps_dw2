@@ -13,7 +13,7 @@ import "../styles/criarquizzes.css";
                     onClick={voltarTelaIniOrg}>x</button>
                 <input type="text" 
                         className="input-tema"
-                        placeholder="adicione o tema"/>
+                        placeholder="Adicione o tema"/>
             </div>
             <div className="conteudo-criar">
             <div className="box-quiz">
@@ -55,36 +55,42 @@ import "../styles/criarquizzes.css";
             </div>
                 <button 
                     className="seta-btn"
-                    onClick={() => setAbrirModal(true)}>m</button>
+                    onClick={() => setAbrirModal(!abrirModal)}>x
+                </button>
                     
-                    {abrirModal && (
-                    <button fechar={() => setAbrirModal(false)}>
-                        <h2>Battle Quiz</h2>
-                        <div className="time">
-                            <h2>Limite de tempo</h2>
-                            <select name="time" id="time">
-                                <option value="5">5 segundos</option>
-                                <option value="10">10 segundos</option>
-                                <option value="15">15 segundos</option>
-                                <option value="20">20 segundos</option>
-                            </select>
-                        </div>
-                        <div className="pontuacao">
-                        <h2>Limite de tempo</h2>
-                            <select name="pont" id="pontos">
-                                <option value="2">2 pontos</option>
-                                <option value="3">3 segundos</option>
-                                <option value="5">5 segundos</option>
-                                <option value="10">10 segundos</option>
-                            </select>
-                        </div>
-                        <div className="add-pgnt"></div>
-                        <div className="next"></div>
-                        </button>
-                    )}
-            </div>
-            
 
+        {/* PAINEL ROXO */}
+                <div className={`modal-lateral ${abrirModal ? "ativo" : ""}`}>
+                <h2>Battle Quiz</h2>
+
+                <div className="time">
+                    <h3>Limite de tempo</h3>
+                    <select name="time" id="time">
+                    <option value="5">5 segundos</option>
+                    <option value="10">10 segundos</option>
+                    <option value="15">15 segundos</option>
+                    <option value="20">20 segundos</option>
+                    </select>
+                </div>
+
+                <div className="pontuacao">
+                    <h3>Pontos</h3>
+                    <select name="pont" id="pontos">
+                    <option value="2">2 pontos</option>
+                    <option value="3">3 pontos</option>
+                    <option value="5">5 pontos</option>
+                    <option value="10">10 pontos</option>
+                    </select>
+                </div>
+
+                <button className="add-pgnt">Adicionar perguntas +</button>
+
+                <div className="nav-btns">
+                    <button className="anterior">Anterior</button>
+                    <button className="proximo">Próximo</button>
+                </div>
+            </div>
         </div>
-    )
-};
+    </div>
+  );
+}
