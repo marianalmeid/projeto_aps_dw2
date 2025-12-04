@@ -147,4 +147,14 @@
     display: flex;
     justify-content: space-between;
   }
-  
+
+  .finalizar-quiz {
+  padding: 12px;
+  background-color: var(--roxo3);
+  border: none;
+  color: white;
+  font-size: 1.05rem;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 8px;
+}

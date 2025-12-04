@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/criarquizzes.css";
+import { supabase } from "../supabaseClient";
 
     function SimpleModal({ children, fechar }) {
         return (
@@ -30,6 +31,7 @@ import "../styles/criarquizzes.css";
             return isNaN(i) ? 0 : i;});
             
         const [abrirPainel, setAbrirPainel] = useState(false);
+        const perguntaAtual = perguntas[indexAtual];
 
        // persistir perguntas e index
         useEffect(() => {
@@ -45,8 +47,6 @@ import "../styles/criarquizzes.css";
             if (indexAtual < 0) setIndexAtual(0);
             if (indexAtual > perguntas.length - 1) setIndexAtual(Math.max(0, perguntas.length - 1));
         }, [indexAtual, perguntas.length]);
-
-        const perguntaAtual = perguntas[indexAtual];
 
         // helpers de atualização imutável
         function setPerguntasCopia(fn) {
@@ -111,6 +111,112 @@ import "../styles/criarquizzes.css";
 
         function anterior() {
             setIndexAtual((old) => Math.max(0, old - 1));
+        }
+
+        async function finalizarQuiz() {
+            try {
+            // Validações básicas
+                if (!tema.trim()) {
+                    alert("Informe o tema do quiz.");
+                    return;
+                }
+
+                if (!perguntas.length) {
+                    alert("Adicione pelo menos uma pergunta.");
+                    return;
+                }
+
+                // valida cada pergunta
+                for (let pIndex = 0; pIndex < perguntas.length; pIndex++) {
+                    const p = perguntas[pIndex];
+                    if (!p.texto || !p.texto.trim()) {
+                    alert(`Preencha o enunciado da pergunta ${pIndex + 1}.`);
+                    return;
+                    }
+                    // pelo menos 2 respostas não vazias
+                    const filled = p.respostas.filter((r) => r && r.trim()).length;
+                    if (filled < 2) {
+                    alert(`A pergunta ${pIndex + 1} precisa ter pelo menos 2 alternativas preenchidas.`);
+                    return;
+                    }
+                    if (p.correta === null || p.correta === undefined) {
+                    alert(`Marque a alternativa correta da pergunta ${pIndex + 1}.`);
+                    return;
+                    }
+                }
+
+                // Pegando ID do organizador — ASSUNÇÃO: está em localStorage com chave "user_id"
+                // Se for diferente, troque abaixo pela fonte correta (context, prop, etc).
+                const organizadorId = localStorage.getItem("user_id");
+
+                // 1) Criar quiz
+                const { data: quizCriado, error: quizErro } = await supabase
+                    .from("quiz")
+                    .insert([
+                    {
+                        nome_quiz: tema,
+                        idOrganizador: organizadorId || null,
+                        created_at: new Date().toISOString(),
+                    },
+                    ])
+                    .select()
+                    .single();
+
+                if (quizErro) throw quizErro;
+
+                const idQuiz = quizCriado.id_quiz || quizCriado.id || quizCriado.id_quiz; // adapta caso seu campo seja 'id' ou 'id_quiz'
+
+                // 2) Inserir perguntas e alternativas
+                for (const pergunta of perguntas) {
+                    const { data: perguntaCriada, error: perguntaErro } = await supabase
+                    .from("perguntas")
+                    .insert([
+                        {
+                        enunciado: pergunta.texto,
+                        tempo: pergunta.tempo,
+                        // pontos: pergunta.pontos, // se sua tabela tem campo 'pontos', adicione
+                        id_qz: idQuiz,
+                        created_at: new Date().toISOString(),
+                        },
+                    ])
+                    .select()
+                    .single();
+
+                    if (perguntaErro) throw perguntaErro;
+
+                    const idPergunta = perguntaCriada.id_pergunta || perguntaCriada.id || perguntaCriada.id_pergunta;
+
+                    // inserir alternativas
+                    for (let i = 0; i < pergunta.respostas.length; i++) {
+                    const resp = pergunta.respostas[i];
+                    // pular alternativas vazias
+                    if (!resp || !resp.trim()) continue;
+
+                    const correta = pergunta.correta === i;
+
+                    const { error: altErro } = await supabase.from("alternativa").insert([
+                        {
+                        info: resp,
+                        correta,
+                        id_perg: idPergunta,
+                        },
+                    ]);
+
+                    if (altErro) throw altErro;
+                    }
+                }
+
+                // sucesso
+                alert("Quiz criado com sucesso!");
+                // limpa rascunho
+                localStorage.removeItem("quiz_perguntas_v1");
+                localStorage.removeItem("quiz_index_v1");
+                // voltar tela inicial (prop)
+                voltarTelaIniOrg();
+                } catch (err) {
+                console.error("Erro ao finalizar quiz:", err);
+                alert("Erro ao salvar o quiz. Veja o console para mais detalhes.");
+            }
         }
 
     return(
@@ -224,6 +330,9 @@ import "../styles/criarquizzes.css";
               Próximo
             </button>
           </div>
+
+           {/* BOTÃO FINALIZAR */}
+            <button className="finalizar-quiz" onClick={finalizarQuiz}>Finalizar Quiz ✔</button>
         </div>
       </div>
   );
