@@ -80,6 +80,8 @@ button {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .modal-tio .logout{
