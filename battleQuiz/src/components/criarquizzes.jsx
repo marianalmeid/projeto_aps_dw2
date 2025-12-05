@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import "../styles/criarquizzes.css";
 import { supabase } from "../supabaseClient";
@@ -149,13 +150,17 @@ import { supabase } from "../supabaseClient";
                 // Se for diferente, troque abaixo pela fonte correta (context, prop, etc).
                 const organizadorId = localStorage.getItem("user_id");
 
+                if (!organizadorId) {
+                    alert("Erro: usuário não está logado! Faça login novamente.");
+                    return;}
+
                 // 1) Criar quiz
                 const { data: quizCriado, error: quizErro } = await supabase
                     .from("quiz")
                     .insert([
                     {
                         nome_quiz: tema,
-                        idOrganizador: organizadorId || null,
+                        idOrganizador: organizadorId,
                         created_at: new Date().toISOString(),
                     },
                     ])
@@ -174,9 +179,9 @@ import { supabase } from "../supabaseClient";
                         {
                         enunciado: pergunta.texto,
                         tempo: pergunta.tempo,
-                        // pontos: pergunta.pontos, // se sua tabela tem campo 'pontos', adicione
                         id_qz: idQuiz,
                         created_at: new Date().toISOString(),
+                        pontuacao: pergunta.pontos,
                         },
                     ])
                     .select()
@@ -293,10 +298,10 @@ import { supabase } from "../supabaseClient";
               value={perguntaAtual?.tempo ?? 20}
               onChange={(e) => atualizarCampoModal("tempo", Number(e.target.value))}
             >
-              <option value="5">5 segundos</option>
-              <option value="10">10 segundos</option>
-              <option value="15">15 segundos</option>
-              <option value="20">20 segundos</option>
+              <option value={5}>5 segundos</option>
+              <option value={10}>10 segundos</option>
+              <option value={15}>15 segundos</option>
+              <option value={20}>20 segundos</option>
             </select>
           </div>
 
@@ -306,10 +311,10 @@ import { supabase } from "../supabaseClient";
               value={perguntaAtual?.pontos ?? 5}
               onChange={(e) => atualizarCampoModal("pontos", Number(e.target.value))}
             >
-              <option value="2">2 pontos</option>
-              <option value="3">3 pontos</option>
-              <option value="5">5 pontos</option>
-              <option value="10">10 pontos</option>
+              <option value={2}>2 pontos</option>
+              <option value={3}>3 pontos</option>
+              <option value={5}>5 pontos</option>
+              <option value={10}>10 pontos</option>
             </select>
           </div>
 

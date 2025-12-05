@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
 import "../styles/login.css";
@@ -25,6 +26,12 @@ export default function Login({ irParaCadastro, irParaTelaIniJog, irParaTelaIniO
   }
 
   console.log("LOGIN OK:", loginData);
+
+  //armazena o id do usuario
+  const {data: { session },} = await supabase.auth.getSession();
+  
+  if (session?.user?.id) {
+  localStorage.setItem("user_id", session.user.id);}
 
 
   const userId = loginData.user.id;
