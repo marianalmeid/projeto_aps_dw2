@@ -154,6 +154,7 @@ import { supabase } from "../supabaseClient";
                     alert("Erro: usuário não está logado! Faça login novamente.");
                     return;}
 
+
                 // 1) Criar quiz
                 const { data: quizCriado, error: quizErro } = await supabase
                     .from("quiz")
@@ -210,7 +211,6 @@ import { supabase } from "../supabaseClient";
                     if (altErro) throw altErro;
                     }
                 }
-
                 // sucesso
                 alert("Quiz criado com sucesso!");
                 // limpa rascunho

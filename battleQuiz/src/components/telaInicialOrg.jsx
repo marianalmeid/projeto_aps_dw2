@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import "../styles/telainicialOrg.css";
@@ -7,12 +8,57 @@ export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}
     const botaoRef = useRef(null);
     const modalRef = useRef(null);
     const [posicao, setPosicao] = useState({top:0, left:0});
+    const [quizzes, setQuizzes] = useState([]);
 
     const [usuario, setUsuario] = useState({
         nome: "",
         email: ""
     });
+    
+    async function carregarQuizzes() {
+        // 1. Buscar todos os quizzes
+        const { data: quizzes, error: erroQuiz } = await supabase
+            .from("quiz")
+            .select("id_quiz, nome_quiz");
 
+        if (erroQuiz) {
+            console.error("Erro ao buscar quizzes:", erroQuiz);
+            return [];
+        }
+
+        // 2. Buscar todas as perguntas
+        const { data: perguntas, error: erroPerguntas } = await supabase
+            .from("perguntas")
+            .select("id_qz");
+
+        if (erroPerguntas) {
+            console.error("Erro ao buscar perguntas:", erroPerguntas);
+            return [];
+        }
+
+        // 3. Fazer contagem das perguntas por quiz
+        const contagem = {};
+        perguntas.forEach((p) => {
+            if (!contagem[p.id_qz]) contagem[p.id_qz] = 0;
+            contagem[p.id_qz]++;
+        });
+
+        // 4. Retornar quizzes com contagem
+        return quizzes.map((q) => ({
+            id: q.id_quiz,
+            nome: q.nome_quiz,
+            totalPerguntas: contagem[q.id_quiz] || 0,
+        }));
+        }
+
+
+    useEffect(() => {
+    async function carregar() {
+        const resultado = await carregarQuizzes();
+        setQuizzes(resultado);
+    }
+    carregar();
+    }, []);
     useEffect(() => {
         async function carregarUsuario() {
             const { data: { user } } = await supabase.auth.getUser();
@@ -69,7 +115,6 @@ export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}
 
        
     }, [abrirModal]);
-
     return(
         <div className="container-telaio">
             <div className="header-tio">
@@ -123,6 +168,14 @@ export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}
                 </div>
 
                 <div className="acoes">
+
+                {quizzes.map((quiz) => (
+                    <div key={quiz.id} className="quiz-card-tio">
+                        <div className="quiz-tema">{quiz.nome}</div>
+                        <div className="quiz-info">{quiz.totalPerguntas} perguntas</div>
+                    </div>
+                ))}
+
                     <button className="btn-add"
                             onClick={irParaAbaCriar}>+</button>
                 </div>

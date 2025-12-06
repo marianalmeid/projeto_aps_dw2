@@ -152,6 +152,8 @@ button {
 
 /* Botão grande "+" */
 .acoes {
+  display: flex;
+  flex-direction: row;
   height: auto;
   margin-top: 10px;
   padding-left: 20px; /* mantém ele no canto esquerdo */
@@ -160,6 +162,7 @@ button {
 .btn-add{
   width: 15%;
   height: 40%;
+  margin: 5px;
   background: var(--roxo1);
   border: none;
   border-radius: 15px;
@@ -173,4 +176,42 @@ button {
 .btn-add-tio:hover {
   background-color: #e4caff;
   transform: scale(1.05);
+}
+
+.quiz-card-tio {
+  width: 15%;
+  height: 40%;
+  margin: 5px;
+  background: var(--roxo1);
+  border: none;
+  border-radius: 15px;
+  color: var(--roxo2);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* igual visual */
+  align-items: center;
+
+}
+
+.quiz-tema{
+  width: 100%;
+  height: 90%;
+  text-align: center;
+  font-family: var(--fonte-titulo);
+  font-size: 1rem;
+  padding: 10px;
+}
+.quiz-info{
+  background: var(--roxo2);
+  width: 100%;
+  height: 10%;
+  color: var(--roxo1);
+  font-size: 0.5rem;
+  font-family: var(--fonte-perguntas);
+  text-align: end;
+  padding: 10px;
 }
