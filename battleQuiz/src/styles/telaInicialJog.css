@@ -109,9 +109,54 @@ button {
     height: 100%;
 }
 
-.box{
+.box-jog{
     background-color: var(--roxo2);
     width: 70%;
-    height: 70%;
-    border-radius: 1.5%;
+    height: auto;          /* permite ajustar à quantidade de quizzes */
+    min-height: 70vh;
+    border-radius: 12px;
+    padding: 40px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+    box-sizing: border-box;
+}
+
+.box-jog::before {
+    content: "Edições";
+    color: var(--branco);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Cartões dos quizzes */
+.quiz-card-tio-jog {
+    width: 100%;
+    background-color: var(--roxo1);  /* tom pastel do exemplo */
+    padding: 20px 28px;
+
+    border-radius: 14px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--roxo2);
+
+    transition: 0.2s ease-in-out;
+}
+
+/* Hover */
+.quiz-card-tio-jog:hover {
+    background-color: var(--roxo7);
+    transform: scale(1.02);
+    color: var(--branco);
 }

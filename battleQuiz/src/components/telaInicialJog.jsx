@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import TelaQuiz from "./TelaQuiz";
 import "../styles/telaInicialJog.css";
 
 export default function TelaInicialJogador({voltarParaLogin}){
@@ -8,10 +9,59 @@ export default function TelaInicialJogador({voltarParaLogin}){
     const modalRef = useRef(null);
     const [posicao, setPosicao] = useState({top:0, left:0});
 
+    const [quizSelecionado, setQuizSelecionado] = useState(null);
+
     const [usuario, setUsuario] = useState({
         nome: "",
         email: ""
     });
+
+    const [quizzes, setQuizzes] = useState([]);
+
+    async function carregarQuizzes() {
+        // 1. Buscar quizzes
+        const { data: quizzes, error: erroQuiz } = await supabase
+            .from("quiz")
+            .select("id_quiz, nome_quiz");
+
+        if (erroQuiz) {
+            console.error("Erro ao buscar quizzes:", erroQuiz);
+            return [];
+        }
+
+        // 2. Buscar perguntas
+        const { data: perguntas, error: erroPerguntas } = await supabase
+            .from("perguntas")
+            .select("id_qz");
+
+        if (erroPerguntas) {
+            console.error("Erro ao buscar perguntas:", erroPerguntas);
+            return [];
+        }
+
+        // 3. Contar perguntas por quiz
+        const contagem = {};
+        perguntas.forEach((p) => {
+            if (!contagem[p.id_qz]) contagem[p.id_qz] = 0;
+            contagem[p.id_qz]++;
+        });
+
+        // 4. Retornar quizzes com totalPerguntas
+        return quizzes.map((q) => ({
+            id: q.id_quiz,
+            nome: q.nome_quiz,
+            totalPerguntas: contagem[q.id_quiz] || 0,
+        }));
+    }
+
+    // Carregar quizzes ao abrir tela
+    useEffect(() => {
+        async function carregar() {
+            const resultado = await carregarQuizzes();
+            setQuizzes(resultado);
+        }
+        carregar();
+    }, []);
 
     useEffect(() => {
         async function carregarUsuario() {
@@ -70,6 +120,10 @@ export default function TelaInicialJogador({voltarParaLogin}){
        
     }, [abrirModal]);
 
+    if (quizSelecionado) {
+    return <TelaQuiz idQuiz={quizSelecionado} voltar={() => setQuizSelecionado(null)} />;
+}
+
     return(
         <div className="container-telaij">
             <div className="header-tij">
@@ -95,8 +149,14 @@ export default function TelaInicialJogador({voltarParaLogin}){
                     )}
                 </div>
             </div>
-            
-            <div className="box">
+
+            <div className="box-jog">
+                {quizzes.map((quiz) => (
+                    <div key={quiz.id} className="quiz-card-tio-jog" onClick={() => setQuizSelecionado(quiz.id)}>
+                        <div className="quiz-tema">{quiz.nome}</div>
+                        <div className="quiz-info">{quiz.totalPerguntas} perguntas</div>
+                    </div>
+                ))}
             </div>
         </div>
     );

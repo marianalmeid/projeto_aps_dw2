@@ -1,0 +1,169 @@
+/* ====== CONTAINER PRINCIPAL ====== */
+.container-quiz {
+    width: 100%;
+    height: 100vh;
+    background-color: #e6c8ff; /* lilás super claro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    font-family: "Poppins", sans-serif;
+    color: var(--branco);
+}
+
+/* ===== HEADER ===== */
+.header-quiz {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.timer {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    text-align: center;
+    font-family: var(--fonte-perguntas);
+    color: var(--roxo3);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* ===== BOX DO QUIZ ===== */
+.box-quiz {
+    background-color: #8a2be2;
+    width: 70%;
+    min-height: 60%;
+    border-radius: 14px;
+    padding: 30px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+}
+
+/* ===== TÍTULO ===== */
+.titulo-quiz {
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: var(--fonte-titulo);
+    font-style: normal;
+    color: #3b007a;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.titulo-header {
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: var(--fonte-titulo);
+    font-style: normal;
+    color: #3b007a;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* ===== CARD PERGUNTA ===== */
+.pergunta-card {
+    font-family: var(--fonte-perguntas);
+    color: var(--roxo3);
+    font-size: 1.5rem;
+    font-style: normal;
+}
+
+.enunciado-p{
+    font-family: var(--fonte-perguntas);
+    color: var(--roxo3);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.opcao{
+    font-family: var(--fonte-perguntas);
+    color: var(--preto);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Texto do enunciado */
+.pergunta-card p {
+    margin-bottom: 8px;
+}
+
+/* ===== OPÇÕES ===== */
+.opcoes {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.opcoes label {
+    cursor: pointer;
+}
+
+/* ===== BOTÃO CONFIRMAR ===== */
+.btn-confirmar {
+    margin-top: 15px;
+    background-color: #6b20bf;
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    float: right;
+}
+
+.btn-confirmar:hover {
+    background-color: #4e1891;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.btn-voltar {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+
+    background-color: #6b20bf;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-voltar:hover {
+    background-color: #4e1891;
+}
+
+/* ===== RESPOSTA CORRETA ===== */
+.resposta-certa {
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--roxo3); /* ou a cor que quiser */
+}
+
+/* ===== BOTÃO PRÓXIMA PERGUNTA ===== */
+.btn-proxima {
+    margin-top: 15px;
+    background-color: #4e1891; /* roxo mais escuro */
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-proxima:hover {
+    background-color: #3a126e;
+}

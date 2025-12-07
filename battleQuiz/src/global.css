@@ -3,11 +3,13 @@
 
 
 :root{
+    --branco: #white;
     --roxo1: #e4c2ff;
     --roxo2: #9634e4;
     --roxo3: #4f1964;
     --roxo4: #ab6ddd;
     --roxo5: #ce93fa;
+    --preto: #000000;
     
 
     /* fontes*/
