@@ -141,11 +141,28 @@
   .add-pgnt {
     padding: 10px;
     margin-top: auto;
+    color: var(--roxo3);
+    font-weight: bold;
+    background-color: var(--roxo4);
   }
   
   .nav-btns {
     display: flex;
     justify-content: space-between;
+  }
+
+  .anterior{
+    color: var(--roxo3);
+    font-weight: bold;
+    background-color: var(--roxo4);
+    padding: 10px;
+  }
+
+  .proximo{
+    color: var(--roxo3);
+    font-weight: bold;
+    background-color: var(--roxo4);
+    padding: 10px;
   }
 
   .finalizar-quiz {
@@ -157,4 +174,25 @@
   cursor: pointer;
   border-radius: 6px;
   margin-top: 8px;
+}
+
+.dados{
+  display: flex;
+  gap: 8;
+  margin-top: 12;
+}
+
+.btn-remover{
+  border: 1px solid var(--roxo2);
+  background-color: var(--roxo2);
+  color: white;
+  width: 80%;
+  font-weight: bold;
+}
+
+.qntd-perg{
+  color: var(--roxo7);
+  align-self: center;
+  margin-left: auto;
+  font-weight: bold;
 }

@@ -1,4 +1,3 @@
-/* ====== CONTAINER PRINCIPAL ====== */
 .container-quiz {
     width: 100%;
     height: 100vh;
@@ -11,7 +10,6 @@
     color: var(--branco);
 }
 
-/* ===== HEADER ===== */
 .header-quiz {
     width: 100%;
     height: 80px;
@@ -32,10 +30,10 @@
     font-weight: bold;
 }
 
-/* ===== BOX DO QUIZ ===== */
 .box-quiz {
-    background-color: #8a2be2;
+    background-color: var(--roxo2);
     width: 70%;
+    height: auto;
     min-height: 60%;
     border-radius: 14px;
     padding: 30px;
@@ -47,7 +45,6 @@
     gap: 35px;
 }
 
-/* ===== TÍTULO ===== */
 .titulo-quiz {
     font-size: 2.5rem;
     font-weight: 800;
@@ -68,7 +65,6 @@
     text-align: center;
 }
 
-/* ===== CARD PERGUNTA ===== */
 .pergunta-card {
     font-family: var(--fonte-perguntas);
     color: var(--roxo3);
@@ -90,12 +86,10 @@
     font-weight: bold;
 }
 
-/* Texto do enunciado */
 .pergunta-card p {
     margin-bottom: 8px;
 }
 
-/* ===== OPÇÕES ===== */
 .opcoes {
     margin-top: 10px;
     display: flex;
@@ -107,7 +101,6 @@
     cursor: pointer;
 }
 
-/* ===== BOTÃO CONFIRMAR ===== */
 .btn-confirmar {
     margin-top: 15px;
     background-color: #6b20bf;
@@ -122,16 +115,15 @@
 }
 
 .btn-confirmar:hover {
-    background-color: #4e1891;
+    background-color: var(--roxo6);
 }
 
-/* ===== BOTÃO VOLTAR ===== */
 .btn-voltar {
     position: absolute;
     left: 20px;
     top: 20px;
 
-    background-color: #6b20bf;
+    background-color: var(--roxo2);
     color: white;
     padding: 8px 20px;
     border-radius: 6px;
@@ -141,20 +133,18 @@
 }
 
 .btn-voltar:hover {
-    background-color: #4e1891;
+    background-color: var(--roxo6);
 }
 
-/* ===== RESPOSTA CORRETA ===== */
 .resposta-certa {
     margin-top: 15px;
     font-weight: bold;
-    color: var(--roxo3); /* ou a cor que quiser */
+    color: var(--roxo3);
 }
 
-/* ===== BOTÃO PRÓXIMA PERGUNTA ===== */
 .btn-proxima {
     margin-top: 15px;
-    background-color: #4e1891; /* roxo mais escuro */
+    background-color: var(--roxo6);
     color: white;
     border: none;
     padding: 10px 28px;
@@ -165,5 +155,5 @@
 }
 
 .btn-proxima:hover {
-    background-color: #3a126e;
+    background-color: var(--roxo7);
 }

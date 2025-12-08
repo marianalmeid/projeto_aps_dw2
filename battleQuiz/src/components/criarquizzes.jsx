@@ -270,7 +270,7 @@ import { supabase } from "../supabaseClient";
                             ))}
                         </div>
             </div>
-            <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+            <div className="dados">
                 <button
                 className="btn-remover"
                 onClick={() => removerPergunta(indexAtual)}
@@ -279,7 +279,7 @@ import { supabase } from "../supabaseClient";
                 Remover pergunta
                 </button>
 
-                <div style={{ marginLeft: "auto", alignSelf: "center", color: "#4a2a5b" }}>
+                <div className="qntd-perg">
                 Pergunta {indexAtual + 1} / {perguntas.length}
                 </div>
             </div>

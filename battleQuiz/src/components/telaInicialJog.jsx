@@ -150,7 +150,7 @@ export default function TelaInicialJogador({voltarParaLogin}){
                 </div>
             </div>
 
-            <div className="box-jog">
+            <div className="box-jog">Edições
                 {quizzes.map((quiz) => (
                     <div key={quiz.id} className="quiz-card-tio-jog" onClick={() => setQuizSelecionado(quiz.id)}>
                         <div className="quiz-tema">{quiz.nome}</div>
