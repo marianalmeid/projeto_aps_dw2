@@ -6,17 +6,26 @@ import AbaCriarQuizz from "./components/criarquizzes.jsx";
 import "./App.css";
 import TelaInicialOrganizador from "./components/telaInicialOrg.jsx";
 
-function App() {
-  //const [paginaAtual, setPaginaAtual] = useState("cadastro");
+import TelaQuiz from "./components/TelaQuiz.jsx";
+import RankingJog from "./components/rankingJog.jsx";
 
+
+function App() {
   const [paginaAtual, setPaginaAtual] = useState(
   localStorage.getItem("paginaAtual") || "cadastro"
-);
+  );
 
-useEffect(() => {
-  localStorage.setItem("paginaAtual", paginaAtual);
-}, [paginaAtual]);
+  const [resultadoQuiz, setResultadoQuiz] = useState(null);
+  const [idSelecionado, setIdSelecionado] = useState(null);
 
+  useEffect(() => {
+    localStorage.setItem("paginaAtual", paginaAtual);
+  }, [paginaAtual]);
+
+  function finalizarQuiz(dados) {
+    setResultadoQuiz(dados);
+    setPaginaAtual("rankingJog");
+  }
 
   return (
     <div className="App">
@@ -50,6 +59,21 @@ useEffect(() => {
       {paginaAtual === "criarquizzes" && (
         <AbaCriarQuizz
         voltarTelaIniOrg={() => setPaginaAtual("telaInicialOrg")}/>
+      )}
+
+      {paginaAtual === "quiz" && (
+        <TelaQuiz
+          idQuiz={idSelecionado}
+          voltar={() => setPaginaAtual("telaInicialJog")}
+          finalizarQuiz={finalizarQuiz}
+        />
+      )}
+
+      {paginaAtual === "rankingJog" && (
+        <RankingJog
+          resultado={resultadoQuiz}
+          voltar={() => setPaginaAtual("telaInicialJog")}
+        />
       )}
     </div>
   );

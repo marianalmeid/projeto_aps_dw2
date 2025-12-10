@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { supabase } from "../supabaseClient";
 import "../styles/telaQuiz.css";
 
-export default function TelaQuiz({ idQuiz, voltar }) {
+export default function TelaQuiz({ idQuiz, voltar, finalizarQuiz }) {
     const [perguntas, setPerguntas] = useState([]);
     const [quiz, setQuiz] = useState(null);
     const [indiceAtual, setIndiceAtual] = useState(0);
@@ -12,6 +12,10 @@ export default function TelaQuiz({ idQuiz, voltar }) {
 
     const [tempoRestante, setTempoRestante] = useState(0);
     const intervaloRef = useRef(null);
+
+    const [acertos, setAcertos] = useState(0);
+    const [erros, setErros] = useState(0);
+    const [pontuacaoTotal, setPontuacaoTotal] = useState(0);
 
     useEffect(() => {
         async function carregarQuiz() {
@@ -61,6 +65,8 @@ export default function TelaQuiz({ idQuiz, voltar }) {
                     setRespostaCorreta(correta.info);
                     setMostrarResposta(true);
 
+                    setErros((e) => e + 1);
+
                     return 0;
                 }
                 return t - 1;
@@ -88,13 +94,30 @@ export default function TelaQuiz({ idQuiz, voltar }) {
 
         setRespostaCorreta(correta.info);
         setMostrarResposta(true);
+
+        if (selecionada === correta.id_alternativa) {
+            setAcertos((a) => a + 1);
+            setPontuacaoTotal((p) => p + pergunta.pontuacao);
+        } else {
+            setErros((e) => e + 1);
+        }
     }
 
     function proximaPergunta() {
         if (indiceAtual < perguntas.length - 1) {
             setIndiceAtual(indiceAtual + 1);
         } else {
-            alert("Quiz finalizado!");
+            clearInterval(intervaloRef.current);
+
+            const pontuacao = acertos * 2;
+
+            finalizarQuiz({
+                acertos,
+                erros,
+                pontuacao,
+                total: perguntas.length,
+                nomeQuiz: quiz.nome_quiz
+            });
         }
     }
 
@@ -161,7 +184,7 @@ export default function TelaQuiz({ idQuiz, voltar }) {
                                 className="btn-proxima"
                                 onClick={proximaPergunta}
                             >
-                                Próxima pergunta
+                                Próxima página
                             </button>
                         </>
                     )}

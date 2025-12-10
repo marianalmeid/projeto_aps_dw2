@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import TelaQuiz from "./TelaQuiz";
 import "../styles/telaInicialJog.css";
+import rankingJog from "./rankingJog"; 
 
 export default function TelaInicialJogador({voltarParaLogin}){
     const [abrirModal, setAbrirModal] = useState(false);
@@ -15,6 +16,9 @@ export default function TelaInicialJogador({voltarParaLogin}){
         nome: "",
         email: ""
     });
+
+    const [resultadoFinal, setResultadoFinal] = useState(null);
+
 
     const [quizzes, setQuizzes] = useState([]);
 
@@ -120,8 +124,27 @@ export default function TelaInicialJogador({voltarParaLogin}){
        
     }, [abrirModal]);
 
-    if (quizSelecionado) {
-    return <TelaQuiz idQuiz={quizSelecionado} voltar={() => setQuizSelecionado(null)} />;
+    if (resultadoFinal) {
+    return (
+        <RankingJog
+            resultado={resultadoFinal}
+            voltar={() => {
+                setResultadoFinal(null);
+                setQuizSelecionado(null);
+            }}
+        />
+    );
+}
+
+// Se escolheu um quiz -> vai para TelaQuiz
+if (quizSelecionado) {
+    return (
+        <TelaQuiz
+            idQuiz={quizSelecionado}
+            voltar={() => setQuizSelecionado(null)}
+            finalizarQuiz={(dados) => setResultadoFinal(dados)}
+        />
+    );
 }
 
     return(
@@ -130,8 +153,8 @@ export default function TelaInicialJogador({voltarParaLogin}){
                 <div className="space-ti"></div>
                 <h1 className="title">UTFPR | Battle Quiz</h1>
                 <div className="perfil-btn">
-                    <button className="icon" ref={botaoRef} onClick={() => setAbrirModal(!abrirModal)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" strokeLinecap="round"
-              strokeLinejoin="round"class="lucide lucide-circle-user-round-icon lucide-circle-user-round" color= "var(--roxo3)"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></button>
+                    <button className="icon" ref={botaoRef} onClick={() => setAbrirModal(!abrirModal)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+              strokeLinejoin="round"className="lucide lucide-circle-user-round-icon lucide-circle-user-round" color= "var(--roxo3)"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></button>
 
                      {/* Modal */}
                     {abrirModal && (

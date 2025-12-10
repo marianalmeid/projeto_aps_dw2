@@ -1,0 +1,72 @@
+.ranking-container {
+    background-color: #e8c4ff;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.ranking-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #4b007d;
+}
+
+.ranking-card {
+    background-color: #9d27db;
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px #0000003b;
+    color: white;
+}
+
+.quiz-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.graph-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.graph {
+    width: 50%;
+}
+
+.pontuacao-box {
+    font-size: 22px;
+    text-align: right;
+}
+
+.pontuacao-titulo {
+    font-weight: bold;
+}
+
+.pontuacao-valor {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.btn-voltar {
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: #4b007d;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.btn-voltar:hover {
+    background-color: #30004f;
+}
