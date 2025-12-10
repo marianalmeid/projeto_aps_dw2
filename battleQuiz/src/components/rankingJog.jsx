@@ -5,9 +5,13 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function rankingJog({ resultado, voltar }) {
+export default function RankingJog({ resultado, voltar }) {
 
-    const { acertos, erros, pontuacao, total, nomeQuiz } = resultado;
+    if (!resultado) {
+        return <p>Resultado não disponível.</p>;
+    }
+
+    const { acertos, erros, nomeQuiz } = resultado;
 
     const data = {
         labels: ["Acertos", "Erros"],
@@ -30,24 +34,28 @@ export default function rankingJog({ resultado, voltar }) {
                 
                 <h2 className="quiz-name">{nomeQuiz}</h2>
 
-                <div className="graph-section">
-                    
-                    <div className="graph">
-                        <Pie data={data} />
-                    </div>
-
-                    <div className="pontuacao-box">
-                        <p className="pontuacao-titulo">Pontuação:</p>
-                        <p className="pontuacao-valor">
-                            {pontuacao}/{total * 2}
-                        </p>
-                    </div>
+                <div className="graph">
+                    <Pie
+                        data={data}
+                        options={{
+                            plugins: {
+                            legend: {
+                                labels: {
+                                color: "#ffffff", // branco
+                                font: {
+                                    size: 16,
+                                    weight: "bold",
+                                },
+                                },
+                            },
+                            },
+                        }}
+                        />
                 </div>
 
                 <button className="btn-voltar" onClick={voltar}>
                     Voltar ao início
                 </button>
-
             </div>
 
         </div>

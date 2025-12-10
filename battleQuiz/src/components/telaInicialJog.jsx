@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import TelaQuiz from "./TelaQuiz";
 import "../styles/telaInicialJog.css";
-import rankingJog from "./rankingJog"; 
+import RankingJog from "./rankingJog";
 
 export default function TelaInicialJogador({voltarParaLogin}){
     const [abrirModal, setAbrirModal] = useState(false);
