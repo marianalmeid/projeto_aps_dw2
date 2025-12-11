@@ -3,7 +3,7 @@
 
 
 :root{
-    --branco: #white;
+    --branco: ;
     --roxo1: #e4c2ff;
     --roxo2: #9634e4;
     --roxo3: #4f1964;
@@ -17,4 +17,13 @@
     /* fontes*/
     --fonte-perguntas: "Quicksand", sans-serif;
     --fonte-titulo:  "Rammetto One", sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--roxo1); /* a mesma cor do seu app */
+    overflow-x: hidden; /* evita vazamento lateral */
 }

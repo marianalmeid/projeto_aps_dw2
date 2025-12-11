@@ -11,14 +11,17 @@
 body, html {
   width: 100%;
   height: 100%;
-  font-family: var(--fonte-perguntas)
-
+  font-family: var(--fonte-perguntas);
+  background: var(--roxo1); /* a mesma cor do seu app */
+  overflow-x: hidden; /* evita vazamento lateral */
+  max-height: 100vh;
 }
 
 .container {
     display: flex;
     height: 100%;
     width: 100%;
+    min-height: 100vh; 
   }
   
   /* Painel esquerdo */
@@ -209,13 +212,14 @@ body, html {
     background-color: #8762d6;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
+    
     .container {
       flex-direction: column;
       display: flex;
       width: 100%;
       height: auto;
-      
+      min-height: 100vh;
     }
 
     .left-panel{
@@ -225,6 +229,10 @@ body, html {
 
     .right-panel{
       width: 100%;
+    }
+
+    .btn-cadastro{
+      font-size: 18px;
     }
   }
 

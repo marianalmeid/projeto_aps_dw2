@@ -16,6 +16,7 @@ button {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    min-height: 100vh; 
 }
 
 .header-tio{
@@ -102,6 +103,7 @@ button {
     border: none;
     padding: 0;
     background-color: var(--roxo1);
+    outline: none;
 }
 
 .header-tio .perfil-btn .icon svg{
@@ -157,6 +159,7 @@ button {
   height: auto;
   margin-top: 10px;
   padding-left: 20px; /* mantém ele no canto esquerdo */
+  flex-wrap: wrap;
 }
 
 .btn-add{
@@ -182,10 +185,10 @@ button {
   width: 15%;
   height: 40%;
   margin: 5px;
-  background: var(--roxo1);
+  background: var(--roxo4);
   border: none;
   border-radius: 15px;
-  color: var(--roxo2);
+  color: var(--roxo3);
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -199,19 +202,95 @@ button {
 
 .quiz-tema{
   width: 100%;
-  height: 90%;
+  height: 95%;
   text-align: center;
   font-family: var(--fonte-titulo);
   font-size: 1rem;
   padding: 10px;
+  background: var(--roxo1);
+  border-radius: 15px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .quiz-info{
-  background: var(--roxo2);
   width: 100%;
-  height: 10%;
+  height: 5%;
   color: var(--roxo1);
   font-size: 0.5rem;
   font-family: var(--fonte-perguntas);
   text-align: end;
   padding: 10px;
+  border-radius: 15px;
+}
+
+/*Responsividade*/
+@media (max-width: 900px) {
+  .header-tio{
+    width: 100%;
+    height: 20%;
+  }
+    .toolbar {
+        gap: 10px;
+        padding-left: 10px;
+    }
+
+    .header-tio .perfil-btn .icon{
+      width: 40px;
+      height: 100%;
+    }
+    .acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  height: 60vh;        /* altura visível */
+  overflow-y: auto;    /* scroll vertical */
+  overflow-x: hidden;  /* evita barra horizontal */
+}
+
+
+    .quiz-card-tio,
+    .btn-add {
+        width: 120px;
+        height: 70px;
+    }
+}
+
+/* Telas pequenas (celular) */
+@media (max-width: 600px) {
+    .header-tio {
+        height: 20%;
+        padding: 0 10px;
+
+    }
+
+    .header-tio .title{
+      font-size: 30px;
+    }
+
+    .header-tio .perfil-btn .icon{
+      width: 40px;
+      height: 100%;
+    }
+    .quiz-card-tio,
+    .btn-add {
+        width: 100px;
+        height: 65px;
+
+    }
+
+    .btn-salas,
+    .btn-rankings {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+
+    .quiz-tema {
+        font-size: 0.8rem;
+    }
+
+    .quiz-info {
+        font-size: 0.6rem;
+    }
 }
