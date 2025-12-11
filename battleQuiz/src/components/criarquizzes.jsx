@@ -249,50 +249,49 @@ import { supabase } from "../supabaseClient";
             </div>
 
             <div className="conteudo-criar">
-            <div className="box-quiz">
-                <input type="text"
-                        className="input-pergunta"
-                        placeholder="Digite a pergunta"
-                        value={perguntaAtual?.texto ?? ""}
-                        onChange={(e) => atualizarTextoPergunta(e.target.value)}/>
-                
-                <div className="lista-alternativa">
-                    {(perguntaAtual?.respostas ?? ["", "", "", ""]).map((resp, i) => (
-                        <div className="item-resposta" key={i}>
-                            <label className="radio-label">
-                                <input
-                                    type="radio"
-                                    name={`resp-${indexAtual}`}
-                                    checked={perguntaAtual?.correta === i}
-                                    onChange={() => selecionarCorreta(i)}
-                                />
-                                <span className="fake-radio" />
-                                </label>
-
-                                <input
-                                type="text"
-                                className="input-resposta"
-                                placeholder={`Adicionar resposta ${i + 1}`}
-                                value={resp}
-                                onChange={(e) => atualizarResposta(i, e.target.value)}
-                                />
-                            </div>
-                            ))}
-                        </div>
-            </div>
-            <div className="dados">
-                <button
-                className="btn-remover"
-                onClick={() => removerPergunta(indexAtual)}
-                disabled={perguntas.length === 1}
-                >
-                Remover pergunta
-                </button>
 
                 <div className="qntd-perg">
-                Pergunta {indexAtual + 1} / {perguntas.length}
+                    Pergunta {indexAtual + 1} / {perguntas.length}
                 </div>
-            </div>
+
+                <div className="box-quiz">
+                    <input type="text"
+                            className="input-pergunta"
+                            placeholder="Digite a pergunta"
+                            value={perguntaAtual?.texto ?? ""}
+                            onChange={(e) => atualizarTextoPergunta(e.target.value)}/>
+                    
+                    <div className="lista-alternativa">
+                        {(perguntaAtual?.respostas ?? ["", "", "", ""]).map((resp, i) => (
+                            <div className="item-resposta" key={i}>
+                                <label className="radio-label">
+                                    <input
+                                        type="radio"
+                                        name={`resp-${indexAtual}`}
+                                        checked={perguntaAtual?.correta === i}
+                                        onChange={() => selecionarCorreta(i)}
+                                    />
+                                    <span className="fake-radio" />
+                                    </label>
+
+                                    <input
+                                    type="text"
+                                    className="input-resposta"
+                                    placeholder={`Adicionar resposta ${i + 1}`}
+                                    value={resp}
+                                    onChange={(e) => atualizarResposta(i, e.target.value)}
+                                    />
+                                </div>
+                                ))}
+                            </div>
+                </div>
+                <button
+                    className="btn-remover"
+                    onClick={() => removerPergunta(indexAtual)}
+                    disabled={perguntas.length === 1}
+                >
+                    Remover pergunta
+                </button>
             </div>
 
         {/* BOTÃO QUE ABRE O PAINEL LATERAL */}

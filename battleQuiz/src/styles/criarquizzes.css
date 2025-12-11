@@ -1,12 +1,16 @@
-
 .pagina-criar{
+    position: fixed;   
+    inset: 0;          
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: var(--roxo1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;  
+    z-index: 1000;     
 }
+
 
 .pagina-criar input{
     border: none;
@@ -22,9 +26,12 @@
     font-style: normal;
 }
 
-.header-criar{
+.header-criar {
+    position: relative;
     display: flex;
-    height: 20%;
+    justify-content: center;
+    align-items: center;
+    height: 18%;
     width: 100%;
 }
 
@@ -32,17 +39,23 @@
     width: 60%;
     height: 40%;
     text-align: center;
+    font-size: 3rem;
+    color: var(--roxo6);
+    font-family: var(--fonte-perguntas);
+    font-weight: bold;
 }
 
 .conteudo-criar{
     width: 100%;
     height: 80%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column; 
+    justify-content: flex-start;
     align-items: center;
     position: relative;
-
+    gap: 10px;
 }
+
 .add-btn{
     background: var(--roxo4);
     width: 1rem;
@@ -67,8 +80,10 @@
   align-self: flex-start;
   padding: 12px;
   border-radius: 4px;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
+  font-family: var(--fonte-perguntas);
+    font-weight: bold;
 }
 
 .lista-alternativa{
@@ -81,8 +96,10 @@
 
 .item-resposta{
     width: 100%;
-    height: 20%;
-
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .item-resposta input[type="radio"] {
@@ -94,11 +111,32 @@
 .item-resposta .input-resposta{
     width: 90%;
     height: 50%;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    font-family: var(--fonte-perguntas);
+    font-weight: bold;
 }
 
-.close-create{
-    font-size: 3rem;
+.close-create {
+    position: absolute;
+    top: 20px;          
+    left: 20px;         
+    
+    background: var(--roxo7);
+    border: 2px solid var(--roxo7);
+    color: white;
+
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 20;
 }
 
 .seta-btn {
@@ -127,6 +165,20 @@
     gap: 25px;
     transition: right 0.3s ease;
   }
+
+  .modal-lateral {
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100vh;
+    background: var(--roxo5);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    transition: right 0.28s ease;
+    box-shadow: -8px 0 24px rgba(0,0,0,0.25);
+}
 
   .modal-lateral.ativo {
     right: 0;
@@ -176,23 +228,28 @@
   margin-top: 8px;
 }
 
-.dados{
-  display: flex;
-  gap: 8;
-  margin-top: 12;
-}
 
 .btn-remover{
-  border: 1px solid var(--roxo2);
-  background-color: var(--roxo2);
-  color: white;
-  width: 80%;
-  font-weight: bold;
+    margin: 20px auto 0 auto;
+    display: block;
+    width: 200px;
+    padding: 12px;
+
+    background: var(--roxo2);
+    border: 2px solid var(--roxo2);
+    border-radius: 10px;
+
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.qntd-perg{
-  color: var(--roxo7);
-  align-self: center;
-  margin-left: auto;
-  font-weight: bold;
+.qntd-perg {
+    text-align: center;
+    width: 100%;
+    font-size: 1.4rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--roxo7);
 }

@@ -141,8 +141,6 @@ export default function Login({ irParaCadastro, irParaTelaIniJog, irParaTelaIniO
             </button>
           </div>
 
-          <a href="#" className="forgot-password">Esqueci minha senha</a>
-
           <button className="btn-login" onClick={handleLogin}>Entrar</button>
         </form>
 
