@@ -3,5 +3,6 @@ body, html, #root, .App {
   padding: 0;
   height: 100%;
   width: 100%;
+  background-color: var(--roxo1);
 }
 
