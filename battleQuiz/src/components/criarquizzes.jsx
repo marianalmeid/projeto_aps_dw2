@@ -271,7 +271,6 @@ import { supabase } from "../supabaseClient";
                                         checked={perguntaAtual?.correta === i}
                                         onChange={() => selecionarCorreta(i)}
                                     />
-                                    <span className="fake-radio" />
                                     </label>
 
                                     <input
@@ -284,8 +283,8 @@ import { supabase } from "../supabaseClient";
                                 </div>
                                 ))}
                             </div>
-                </div>
-                <button
+                    </div>
+                    <button
                     className="btn-remover"
                     onClick={() => removerPergunta(indexAtual)}
                     disabled={perguntas.length === 1}

@@ -31,6 +31,8 @@ export default function RankingJog({ resultado, voltar }) {
             <h1 className="ranking-title">UTFPR | Battle Quiz</h1>
 
             <div className="ranking-card">
+
+                <h1 className="quiz-title-rnk">Ranking do resultado</h1>
                 
                 <h2 className="quiz-name">{nomeQuiz}</h2>
 
