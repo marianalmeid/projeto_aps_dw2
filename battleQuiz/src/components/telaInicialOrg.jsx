@@ -1,10 +1,12 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import RankingOrg from "./rankingOrg";
 import "../styles/telainicialOrg.css";
 
 export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}){
     const [abrirModal, setAbrirModal] = useState(false);
+    const [abaAtiva, setAbaAtiva] = useState("salas");
     const botaoRef = useRef(null);
     const modalRef = useRef(null);
     const [posicao, setPosicao] = useState({top:0, left:0});
@@ -16,40 +18,24 @@ export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}
     });
     
     async function carregarQuizzes() {
-        // 1. Buscar todos os quizzes
-        const { data: quizzes, error: erroQuiz } = await supabase
+    // Buscar tudo que REALMENTE existe na tabela "quiz"
+        const { data: quizzes, error } = await supabase
             .from("quiz")
-            .select("id_quiz, nome_quiz");
+            .select("id_quiz, nome_quiz, qtd_perguntas, total_respostas");
 
-        if (erroQuiz) {
-            console.error("Erro ao buscar quizzes:", erroQuiz);
+        if (error) {
+            console.error("Erro ao buscar quizzes:", error);
             return [];
         }
 
-        // 2. Buscar todas as perguntas
-        const { data: perguntas, error: erroPerguntas } = await supabase
-            .from("perguntas")
-            .select("id_qz");
-
-        if (erroPerguntas) {
-            console.error("Erro ao buscar perguntas:", erroPerguntas);
-            return [];
-        }
-
-        // 3. Fazer contagem das perguntas por quiz
-        const contagem = {};
-        perguntas.forEach((p) => {
-            if (!contagem[p.id_qz]) contagem[p.id_qz] = 0;
-            contagem[p.id_qz]++;
-        });
-
-        // 4. Retornar quizzes com contagem
+        // Mapeia para o formato que o restante do seu código usa
         return quizzes.map((q) => ({
             id: q.id_quiz,
             nome: q.nome_quiz,
-            totalPerguntas: contagem[q.id_quiz] || 0,
+            totalPerguntas: q.qtd_perguntas || 0,
+            totalRespostas: q.total_respostas || 0,
         }));
-        }
+    }
 
 
     useEffect(() => {
@@ -158,28 +144,38 @@ export default function TelaInicialOrganizador({voltarParaLogin, irParaAbaCriar}
             
             <div className="box">
                 <div className="toolbar">
-                    <button className="btn-salas">
-                        Salas <span className="seta">▲</span>
+                    <button
+                        className={`btn-salas ${abaAtiva === "salas" ? "ativo" : ""}`}
+                        onClick={() => setAbaAtiva("salas")}
+                    >
+                        Salas
                     </button>
 
-                    <button className="btn-rankings">
-                        Rankings <span className="seta">▼</span>
+                    <button
+                        className={`btn-rankings ${abaAtiva === "ranking" ? "ativo" : ""}`}
+                        onClick={() => setAbaAtiva("ranking")}
+                    >
+                        Ranking
                     </button>
                 </div>
 
                 <div className="acoes">
 
-                {quizzes.map((quiz) => (
-                    <div key={quiz.id} className="quiz-card-tio">
-                        <div className="quiz-tema">{quiz.nome}</div>
-                        <div className="quiz-info">{quiz.totalPerguntas} perguntas</div>
-                    </div>
-                ))}
+                    {abaAtiva === "salas" && (
+                        <>
+                            {quizzes.map((quiz) => (
+                                <div key={quiz.id} className="quiz-card-tio">
+                                    <div className="quiz-tema">{quiz.nome}</div>
+                                    <div className="quiz-info">{quiz.totalPerguntas} perguntas</div>
+                                </div>
+                            ))}
 
-                    <button className="btn-add"
-                            onClick={irParaAbaCriar}>+</button>
+                            <button className="btn-add" onClick={irParaAbaCriar}>+</button>
+                        </>
+                    )}
+
+                    {abaAtiva === "ranking" && <RankingOrg quizzes={quizzes} />}
                 </div>
-
             </div>
         </div>
     );

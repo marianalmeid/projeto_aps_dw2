@@ -16,17 +16,20 @@ import { supabase } from "../supabaseClient";
         // Tema do quiz (fixo)
         const [tema, setTema] = useState("");
 
-        // Lista de perguntas
-         const [perguntas, setPerguntas] = useState(() => {
-            try {
-                const raw = localStorage.getItem("quiz_perguntas_v1");
-                return raw ? JSON.parse(raw) : [
-                    { texto: "", respostas: ["", "", "", ""], correta: null, tempo: 20, pontos: 5 }];
-            } catch {
-                return [{ texto: "", respostas: ["", "", "", ""], correta: null, tempo: 20, pontos: 5 }];}
-            });
+        const [qtdPerguntasQuiz, setQtdPerguntasQuiz] = useState(5);
 
-        // Índice da pergunta atual
+
+        const [perguntas, setPerguntas] = useState(() => {
+            try {
+            const raw = localStorage.getItem("quiz_perguntas_v1");
+            return raw
+                ? JSON.parse(raw)
+                : [{ texto: "", respostas: ["", "", "", ""], correta: null, tempo: 20 }];
+            } catch {
+            return [{ texto: "", respostas: ["", "", "", ""], correta: null, tempo: 20 }];
+            }
+        });
+
         const [indexAtual, setIndexAtual] = useState(() => {
             const i = Number(localStorage.getItem("quiz_index_v1") || 0);
             return isNaN(i) ? 0 : i;});
@@ -82,6 +85,10 @@ import { supabase } from "../supabaseClient";
             });
         }
 
+        function atualizarTempo(valor) {
+            setPerguntasCopia(c => c[indexAtual].tempo = valor);
+        }
+
         function adicionarPergunta() {
             setPerguntas((prev) => [
             ...prev,
@@ -122,6 +129,11 @@ import { supabase } from "../supabaseClient";
                     return;
                 }
 
+                if (qtdPerguntasQuiz > perguntas.length) {
+                    alert("A quantidade de perguntas do quiz não pode ser maior que as criadas.");
+                    return;
+                }
+
                 if (!perguntas.length) {
                     alert("Adicione pelo menos uma pergunta.");
                     return;
@@ -146,8 +158,6 @@ import { supabase } from "../supabaseClient";
                     }
                 }
 
-                // Pegando ID do organizador — ASSUNÇÃO: está em localStorage com chave "user_id"
-                // Se for diferente, troque abaixo pela fonte correta (context, prop, etc).
                 const organizadorId = localStorage.getItem("user_id");
 
                 if (!organizadorId) {
@@ -162,6 +172,7 @@ import { supabase } from "../supabaseClient";
                     {
                         nome_quiz: tema,
                         idOrganizador: organizadorId,
+                        qtd_perguntas: qtdPerguntasQuiz,
                         created_at: new Date().toISOString(),
                     },
                     ])
@@ -182,7 +193,6 @@ import { supabase } from "../supabaseClient";
                         tempo: pergunta.tempo,
                         id_qz: idQuiz,
                         created_at: new Date().toISOString(),
-                        pontuacao: pergunta.pontos,
                         },
                     ])
                     .select()
@@ -305,16 +315,13 @@ import { supabase } from "../supabaseClient";
             </select>
           </div>
 
-          <div className="pontuacao">
-            <h3>Pontos</h3>
-            <select
-              value={perguntaAtual?.pontos ?? 5}
-              onChange={(e) => atualizarCampoModal("pontos", Number(e.target.value))}
-            >
-              <option value={2}>2 pontos</option>
-              <option value={3}>3 pontos</option>
-              <option value={5}>5 pontos</option>
-              <option value={10}>10 pontos</option>
+          <div className="qntd-perguntas">
+            <h3>Quantidade de perguntas do quiz</h3>
+            <select value={qtdPerguntasQuiz} onChange={e => setQtdPerguntasQuiz(Number(e.target.value))}>
+                <option value={5}>5 perguntas</option>
+                <option value={10}>10 perguntas</option>
+                <option value={15}>15 perguntas</option>
+                <option value={20}>20 perguntas</option>
             </select>
           </div>
 

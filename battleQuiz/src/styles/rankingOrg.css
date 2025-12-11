@@ -1,0 +1,142 @@
+
+.ranking-container-org {
+  width: 100%;
+  max-width: 900px; 
+  margin: 0 auto;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+
+.ranking-title-org {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 20px;
+  color: white; 
+  font-weight: 700;
+}
+
+.ranking-chart-wrapper-org {
+  display: flex;
+  gap: 20px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 6px;
+  padding: 20px;
+  height: 260px;
+  box-sizing: border-box;
+}
+
+
+.y-axis-org {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.y-line-org {
+  display: flex;
+  align-items: center;
+  height: auto;
+}
+
+.y-label-org {
+  width: 28px;
+  text-align: right;
+  margin-right: 8px;
+  font-size: 13px;
+  color: white; 
+}
+
+
+.y-grid-org {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.bars-area-org {
+  flex: 1;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+
+.bars-org {
+  display: flex;
+  align-items: stretch;
+  gap: 40px;
+  height: 100%;
+}
+
+
+.bar-item-org {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px; 
+}
+
+
+.bar-org {
+  width: 68px;
+  background: linear-gradient(180deg, rgba(23,7,43,1) 0%, rgba(37,12,51,1) 100%);
+  border-radius: 8px 8px 4px 4px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.08) inset;
+  display: block;
+  align-self: flex-end;
+}
+
+
+.bar-org:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+.bar-labels-org {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.bar-name-org {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+
+.bar-value-org {
+  font-size: 13px;
+  color: white;
+  font-weight: 700;
+}
+
+
+.ranking-empty-org {
+  text-align: center;
+  padding: 40px 10px;
+  color: white;
+}
+
+
+.ranking-container-org { 
+  background: rgba(120, 36, 185, 0.06);
+  border-radius: 6px;
+}
+
+.bar-wrap-org {
+  width: 68px;           
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center;
+  box-sizing: border-box;
+}

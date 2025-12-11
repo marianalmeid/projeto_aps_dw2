@@ -2,6 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import { supabase } from "../supabaseClient";
 import "../styles/telaQuiz.css";
 
+function shuffleArray(array) {
+  const copia = [...array];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
 export default function TelaQuiz({ idQuiz, voltar, finalizarQuiz }) {
     const [perguntas, setPerguntas] = useState([]);
     const [quiz, setQuiz] = useState(null);
@@ -18,28 +27,52 @@ export default function TelaQuiz({ idQuiz, voltar, finalizarQuiz }) {
     const [pontuacaoTotal, setPontuacaoTotal] = useState(0);
 
     useEffect(() => {
-        async function carregarQuiz() {
+    async function carregarQuiz() {
+      // Buscar quiz
+      const { data: quizData, error: quizError } = await supabase
+        .from("quiz")
+        .select("*")
+        .eq("id_quiz", idQuiz)
+        .single();
 
-            // 1. Buscar nome do quiz
-            const { data: dadosQuiz } = await supabase
-                .from("quiz")
-                .select("*")
-                .eq("id_quiz", idQuiz)
-                .single();
+      if (quizError) {
+        console.error(quizError);
+        return;
+      }
 
-            setQuiz(dadosQuiz);
+      setQuiz(quizData);
 
-            // 2. Buscar perguntas da edicao
-            const { data: perguntasData } = await supabase
-                .from("perguntas")
-                .select("*, alternativa(info, correta, id_alternativa)")
-                .eq("id_qz", idQuiz);
+      // Buscar perguntas + alternativas
+      const { data: perguntasData, error: perguntasError } = await supabase
+        .from("perguntas")
+        .select("*, alternativa(id_alternativa, info, correta)")
+        .eq("id_qz", idQuiz);
 
-            setPerguntas(perguntasData || []);
-        }
+      if (perguntasError) {
+        console.error(perguntasError);
+        return;
+      }
 
-        carregarQuiz();
-    }, [idQuiz]);
+      // Embaralhar perguntas
+      let perguntasEmbaralhadas = shuffleArray(perguntasData || []);
+
+      // Limitar pela quantidade definida no quiz
+      perguntasEmbaralhadas = perguntasEmbaralhadas.slice(
+        0,
+        quizData.qtd_perguntas
+      );
+
+      // Embaralhar alternativas de cada pergunta
+      perguntasEmbaralhadas = perguntasEmbaralhadas.map((p) => ({
+        ...p,
+        alternativa: shuffleArray(p.alternativa || []),
+      }));
+
+      setPerguntas(perguntasEmbaralhadas);
+    }
+
+    carregarQuiz();
+  }, [idQuiz]);
 
     useEffect(() => {
         if (perguntas.length === 0) return;
@@ -103,18 +136,35 @@ export default function TelaQuiz({ idQuiz, voltar, finalizarQuiz }) {
         }
     }
 
+    async function incrementarTotalRespostas() {
+        console.log("ID do quiz enviado:", idQuiz);
+
+        const { data, error } = await supabase.rpc(
+            "incrementar_respostas_quiz",
+            {
+            quiz_id: idQuiz,
+            }
+        );
+
+        console.log("RPC retorno data:", data);
+        console.log("RPC retorno error:", error);
+
+        if (error) {
+            console.error("Erro ao incrementar respostas:", error);
+        }
+    }
+
     function proximaPergunta() {
         if (indiceAtual < perguntas.length - 1) {
             setIndiceAtual(indiceAtual + 1);
         } else {
             clearInterval(intervaloRef.current);
 
-            const pontuacao = acertos * 2;
+            incrementarTotalRespostas();
 
             finalizarQuiz({
                 acertos,
                 erros,
-                pontuacao,
                 total: perguntas.length,
                 nomeQuiz: quiz.nome_quiz
             });
