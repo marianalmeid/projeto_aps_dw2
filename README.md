@@ -2,7 +2,7 @@ Link do repositório GitHub:
     https://github.com/marianalmeid/trabalhoDw2_3bim
 
 Link do deploy do projeto: 
-
+    https://projeto-aps-dw2-fiq4.onrender.com
 
 Para rodar o código no computador, no terminal digite:
 
