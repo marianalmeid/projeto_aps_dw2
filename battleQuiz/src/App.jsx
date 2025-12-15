@@ -33,7 +33,6 @@ function App() {
        
        <Cadastro 
           irParaLogin={() => setPaginaAtual("login")} 
-          irParaTelaIniJog={() => setPaginaAtual("telaInicialJog")}
         />
       )}
 
