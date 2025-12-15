@@ -3,15 +3,6 @@ import React, { useEffect, useState } from "react";
 import "../styles/criarquizzes.css";
 import { supabase } from "../supabaseClient";
 
-    function SimpleModal({ children, fechar }) {
-        return (
-            <div className="modal-overlay" onClick={fechar}>
-                <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-                    <button className="modal-close" onClick={fechar}>X</button>
-                    {children}
-                </div>
-            </div>);}
-            
     export default function AbaCriarQuizz({voltarTelaIniOrg}){
         // Tema do quiz (fixo)
         const [tema, setTema] = useState("");
